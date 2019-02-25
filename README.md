@@ -1,3 +1,3 @@
 # Fractales
 
-Diverses pages html simples qui génèrent une fractale en utilisant simplement son navigateur web grâce à la technologie html5 canvas.
+Permet de visualiser différentes fractales dans un canvas HTML5, le framework utilisé est Angular. 
