@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <canvas #cnv (click)="dessine()"></canvas>
+  </div>
+  <form (submit)="dessine()">
+    <div class="row form-row">
+      <div class="col-sm-6 form-group">
+        <label for="duration">Load duration :</label>
+        <input
+          type="text"
+          name="duration"
+          class="form-control"
+          [ngModel]="duration()"
+          disabled="true"
+        />
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="nbIterations">Estimated number of iterations :</label>
+        <input
+          type="text"
+          name="nbIterations"
+          class="form-control"
+          [ngModel]="monDessinMystere.countNbIterations()"
+          disabled="true"
+        />
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="col-sm-2 form-group">
+        <label for="async">Async :</label>
+        <input
+          type="checkbox"
+          name="async"
+          class="form-control"
+          (ngModelChange)="monDessinMystere.interval = 1"
+          [(ngModel)]="monDessinMystere.async"
+        />
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="timeBetweenIterations">Time between each iteration :</label>
+        <input
+          type="text"
+          name="timeBetweenIterations"
+          class="form-control"
+          [(ngModel)]="monDessinMystere.interval"
+          [disabled]="!monDessinMystere.async"
+        />
+      </div>
+    </div>
+    <div class="row form-row">
+      <div class="col-sm-6 form-group">
+        <label for="width">Largeur en pixels :</label>
+        <input
+          type="number"
+          name="width"
+          class="form-control"
+          [ngModel]="monDessinMystere.canvas.width"
+          (ngModelChange)="monDessinMystere.changeWidth($event)"
+        />
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="height">Hauteur en pixels :</label>
+        <input
+          type="number"
+          name="height"
+          class="form-control"
+          [(ngModel)]="monDessinMystere.canvas.height"
+          (ngModelChange)="monDessinMystere.changeHeight($event)"
+        />
+      </div>
+    </div>
+    <button type="submit" style="display:none">hidden submit</button>
+  </form>
+</div>

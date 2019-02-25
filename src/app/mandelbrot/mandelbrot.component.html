@@ -1,0 +1,80 @@
+<div (mouseup)="deverouille($event)" class="container">
+  <div class="row">
+    <canvas
+      width="200"
+      height="200"
+      #cnv
+      (mousedown)="verouille($event)"
+      (mousemove)="deplace($event)"
+      (dblclick)="zoom($event)"
+      (DOMMouseScroll)="handleScroll($event)"
+      (mousewheel)="handleScroll($event)"
+    ></canvas>
+  </div>
+  <form (submit)="dessine()">
+    <div class="form-row">
+      <div class="col-sm-4 form-group">
+        <label for="xMean">xMean : </label>
+        <input
+          type="number"
+          name="xMean"
+          class="form-control"
+          [ngModel]="monDessinMystere.center.x | number: '1.3-3'"
+          (ngModelChange)="monDessinMystere.center.x = $event"
+        />
+      </div>
+      <div class="col-sm-4 form-group">
+        <label for="yMean">yMean :</label>
+        <input
+          type="number"
+          name="yMean"
+          class="form-control"
+          [ngModel]="monDessinMystere.center.y | number: '1.3-3'"
+          (ngModelChange)="monDessinMystere.center.y = $event"
+        />
+      </div>
+      <div class="col-sm-4 form-group">
+        <label for="scale">scale :</label>
+        <input
+          type="number"
+          name="scale"
+          class="form-control"
+          [ngModel]="monDessinMystere.scale.toPrecision(3)"
+          (ngModelChange)="monDessinMystere.scale = $event"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-sm-12 form-group">
+        <label for="nbMaxIterations">Nombre maximal d'itérations :</label>
+        <input
+          type="number"
+          name="nbMaxIterations"
+          class="form-control"
+          [(ngModel)]="monDessinMystere.nbMaxIterations"
+        />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-sm-6 form-group">
+        <label for="width">Largeur en pixels :</label>
+        <input
+          type="number"
+          name="width"
+          class="form-control"
+          [(ngModel)]="monDessinMystere.canvas.width"
+        />
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="height">Hauteur en pixels :</label>
+        <input
+          type="number"
+          name="height"
+          class="form-control"
+          [(ngModel)]="monDessinMystere.canvas.height"
+        />
+      </div>
+    </div>
+    <button type="submit" style="display:none">hidden submit</button>
+  </form>
+</div>
