@@ -3,8 +3,9 @@ export abstract class Dessin {
 
   constructor(public canvas: HTMLCanvasElement) {
     this.canvas = canvas;
-    const contexte = canvas.getContext('2d');
-    this.contexte = contexte;
+    this.contexte = canvas.getContext('2d');
+    this.contexte.imageSmoothingEnabled = false;
+    this.contexte.imageSmoothingQuality = 'high';
   }
 
   abstract affiche();

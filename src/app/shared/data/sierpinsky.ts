@@ -32,7 +32,6 @@ export class Sierpinsky extends DessinMonocolore {
   affiche(): Observable<Sierpinsky> {
     return new Observable<Sierpinsky>(observer => {
       super.affiche();
-      console.log('ici-bas');
       this.drawPoints(observer);
 
       // tslint:disable-next-line:no-shadowed-variable
@@ -59,18 +58,21 @@ export class Sierpinsky extends DessinMonocolore {
     } else {
       this.iterate(observer, coins);
     }
-    observer.next(this);
-    observer.complete();
   }
 
   private async asyncIterate(
     observer: Subscriber<Sierpinsky>,
     coins: Coordonnees[]
   ) {
-    for (let i = 0; i < this.countNbIterations(); i++) {
+    const n = this.countNbIterations();
+    for (let i = 0; i < n; i++) {
       await this.sleep(this.interval, () => {
         this.calculateNewPoint(coins);
         this.drawPoint(i);
+        if (i === n - 1) {
+          observer.next(this);
+          observer.complete();
+        }
       });
     }
   }
@@ -79,6 +81,8 @@ export class Sierpinsky extends DessinMonocolore {
     for (let i = 0; i < this.countNbIterations(); i++) {
       this.calculateNewPoint(coins);
       this.drawPoint(i);
+      observer.next(this);
+      observer.complete();
     }
   }
 
@@ -109,7 +113,12 @@ export class Sierpinsky extends DessinMonocolore {
   }
 
   countNbIterations(): number {
-    return Math.round(this.canvas.width * 3 ** Math.log(this.canvas.width));
+    return Math.round(
+      this.canvas.width *
+        this.canvas.width *
+        Math.sqrt(3) *
+        (3 / 4) ** (Math.log(this.canvas.width) / Math.log(3))
+    );
   }
 }
 

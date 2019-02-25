@@ -34,16 +34,29 @@
           class="form-control"
           (ngModelChange)="monDessinMystere.interval = 1"
           [(ngModel)]="monDessinMystere.async"
+          [disabled]="!modifiable"
         />
       </div>
       <div class="col-sm-6 form-group">
-        <label for="timeBetweenIterations">Time between each iteration :</label>
+        <label for="timeBetweenIterations">
+          Time between each iteration (in ms) :
+        </label>
         <input
           type="text"
           name="timeBetweenIterations"
           class="form-control"
           [(ngModel)]="monDessinMystere.interval"
-          [disabled]="!monDessinMystere.async"
+          [disabled]="!monDessinMystere.async || !modifiable"
+        />
+      </div>
+      <div class="col-sm-4 form-group">
+        <label for="timeLeft">Time left (in s) :</label>
+        <input
+          type="text"
+          name="timeLeft"
+          class="form-control"
+          [ngModel]="timeLeft"
+          disabled="true"
         />
       </div>
     </div>
@@ -56,6 +69,7 @@
           class="form-control"
           [ngModel]="monDessinMystere.canvas.width"
           (ngModelChange)="monDessinMystere.changeWidth($event)"
+          [disabled]="!modifiable"
         />
       </div>
       <div class="col-sm-6 form-group">
@@ -66,6 +80,7 @@
           class="form-control"
           [(ngModel)]="monDessinMystere.canvas.height"
           (ngModelChange)="monDessinMystere.changeHeight($event)"
+          [disabled]="!modifiable"
         />
       </div>
     </div>
